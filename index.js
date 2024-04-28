@@ -7,10 +7,10 @@ import { nanoid } from "nanoid";
 import bodyPerser from "body-parser";
 
 function isValidUrl(url) {
-  const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
-  console.log(urlRegex.test(url));
+  const urlRegex = /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z]{2,}(\/.*)?$/i;
   return urlRegex.test(url);
 }
+
 
 const app = express();
 
@@ -35,8 +35,9 @@ app.get("/api/hello", function (req, res) {
 });
 app.post("/api/shorturl", function (req, res) {
   const url = req.body.url;
+  console.log(url);
   if (!isValidUrl(url)) {
-    return res.status(400).json({ "error": "Invalid URL" });
+    return res.json({ error: "Invalid URL" });
     
   }
   const shortUrl = nanoid(6); // Generate a unique ID with length 6
