@@ -5,7 +5,6 @@ import cors from "cors";
 // index.mjs
 import { nanoid } from "nanoid";
 import bodyPerser from "body-parser";
-import { URL } from 'url';
 
 function isValidUrl(url) {
   const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
@@ -37,7 +36,7 @@ app.get("/api/hello", function (req, res) {
 app.post("/api/shorturl", function (req, res) {
   const url = req.body.url;
   if (!isValidUrl(url)) {
-    return res.status(400).json({  error: 'invalid url' });
+    return res.status(400).json({ "error": "Invalid URL" });
     
   }
   const shortUrl = nanoid(6); // Generate a unique ID with length 6
