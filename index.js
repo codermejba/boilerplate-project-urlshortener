@@ -4,8 +4,18 @@ import express from "express";
 import cors from "cors";
 // index.mjs
 import { nanoid } from "nanoid";
-import validUrl from "valid-url";
 import bodyPerser from "body-parser";
+import { URL } from 'url';
+
+function isValidUrl(url) {
+  try {
+    new URL(url);
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
 const app = express();
 
 // Basic Configuration
@@ -29,7 +39,7 @@ app.get("/api/hello", function (req, res) {
 });
 app.post("/api/shorturl", function (req, res) {
   const url = req.body.url;
-  if (!validUrl.isUri(url)) {
+  if (!isValidUrl(url)) {
     return res.status(400).json({  error: 'invalid url' });
     
   }
