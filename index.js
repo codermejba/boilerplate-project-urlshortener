@@ -30,7 +30,7 @@ app.get("/api/hello", function (req, res) {
 app.post("/api/shorturl", function (req, res) {
   const url = req.body.url;
   if (!validUrl.isUri(url)) {
-    return res.status(400).json({ error: 'Invalid URL' });
+    return res.status(400).json({  error: 'invalid url' });
     
   }
   const shortUrl = nanoid(6); // Generate a unique ID with length 6
