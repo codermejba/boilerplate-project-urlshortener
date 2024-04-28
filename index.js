@@ -8,12 +8,9 @@ import bodyPerser from "body-parser";
 import { URL } from 'url';
 
 function isValidUrl(url) {
-  try {
-    new URL(url);
-    return true;
-  } catch (error) {
-    return false;
-  }
+  const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
+  console.log(urlRegex.test(url));
+  return urlRegex.test(url);
 }
 
 const app = express();
